@@ -1,16 +1,16 @@
 #include "simbolo.h"
 
-Simbolo::Simbolo(std::vector<std::string> lectura) {
+Simbolo::Simbolo(std::vector<std::string> kLectura) {
   std::string tmp_entrada;
-  char espacio = ' ';
-  bool lecturaStatus = false;
-  std::vector<int> contador = contarEspacios(lectura);
+  const char kEspacio = ' ';
+  bool lectura_status = false;
+  std::vector<int> vector_contador_espacios = ContarEspacios(kLectura);
   int tmp_contador = 0;
   int letra = 0;
-  for(int cadena = 0; cadena < lectura.size(); cadena++) {
-    while(tmp_contador < contador[cadena]) {
-      while (lectura[cadena][letra] != espacio) {
-        tmp_entrada = tmp_entrada + lectura[cadena][letra];
+  for(int cadena = 0; cadena < kLectura.size(); cadena++) {
+    while(tmp_contador < vector_contador_espacios[cadena]) {
+      while (kLectura[cadena][letra] != kEspacio) {
+        tmp_entrada = tmp_entrada + kLectura[cadena][letra];
         letra += 1;
       }
       letra += 1;
@@ -18,7 +18,7 @@ Simbolo::Simbolo(std::vector<std::string> lectura) {
       tmp_entrada = tmp_entrada + " ";
     }
     if (tmp_contador == 0) {
-      simbolos.push_back(generateSimbolos(lectura[cadena]));
+      simbolos.push_back(GenerarSimbolos(kLectura[cadena]));
     } else { 
       simbolos.push_back(tmp_entrada);
     }
@@ -41,13 +41,13 @@ void Simbolo::displaySimbolos() {
   std::cout << std::endl;
 };
 
-std::vector<int> Simbolo::contarEspacios(std::vector<std::string> entrada) {
+std::vector<int> Simbolo::ContarEspacios(std::vector<std::string> kEntrada) {
   char espacio = ' ';
   std::vector<int> vectorContador;
   int tmp_contador = 0;
-  for(int i = 0; i < entrada.size(); i++) {
-    for(int j = 0; j < entrada[i].size(); j++) {
-      if (entrada[i][j] == espacio) {
+  for(int i = 0; i < kEntrada.size(); i++) {
+    for(int j = 0; j < kEntrada[i].size(); j++) {
+      if (kEntrada[i][j] == espacio) {
         tmp_contador+=1;
       }
     }
@@ -57,10 +57,10 @@ std::vector<int> Simbolo::contarEspacios(std::vector<std::string> entrada) {
   return vectorContador;
 }
 
-std::string Simbolo::generateSimbolos(std::string entrada) {
+std::string Simbolo::GenerarSimbolos(std::string kEntrada) {
   std::string tmp_cadena;
-  for(int letra = 0; letra < entrada.size(); letra++) {
-    tmp_cadena = tmp_cadena + entrada[letra] + " ";
+  for(int letra = 0; letra < kEntrada.size(); letra++) {
+    tmp_cadena = tmp_cadena + kEntrada[letra] + " ";
   }
   return tmp_cadena;
 }
