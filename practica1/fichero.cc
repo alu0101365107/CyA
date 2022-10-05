@@ -6,37 +6,44 @@
 
 #include "fichero.h"
 
+// Constructor de la clase Fichero, este posee un booleano el cual
+// en caso de ser true, se abrira el fichero en modo lectura, para cualquier
+// otro caso, se abrira en escritura.
 Fichero::Fichero(std::string kNombreFichero, bool kOpcode) {
   if (kOpcode == true) { 
-    kFicheroLectura.open(kNombreFichero);
-    std::string tmp_cadena_entrada;
-    if(kFicheroLectura.is_open()) {
-      while(std::getline(kFicheroLectura, tmp_cadena_entrada)) {
-        kLectura.push_back(tmp_cadena_entrada);
+    fichero_lectura.open(kNombreFichero);
+    std::string tmp_cadena_entrada = "";
+    if(fichero_lectura.is_open()) {
+      while(std::getline(fichero_lectura, tmp_cadena_entrada)) {
+        lectura.push_back(tmp_cadena_entrada);
       }
-      kFicheroLectura.close();
+      fichero_lectura.close();
     } else {
       std::cout << "El fichero de lectura no se pudo abrir" << std::endl;
     }
   } else {
-    kFicheroEscritura.open(kNombreFichero);
+    fichero_escritura.open(kNombreFichero);
   };
 }
 
+// Destructor de la clase Fichero, el cual en caso de estar los ficheros
+// abiertos, se cerraran.
 Fichero::~Fichero() {
-  if(kFicheroLectura.is_open()) {
-    kFicheroLectura.close();
-  } else if (kFicheroEscritura.is_open()) {
-    kFicheroEscritura.close();
+  if(fichero_lectura.is_open()) {
+    fichero_lectura.close();
+  } else if (fichero_escritura.is_open()) {
+    fichero_escritura.close();
   }
 };
 
+// Getter para obtener el vector de la lectura de datos del fichero
 std::vector<std::string> Fichero::GetVectorString() {
-  return kLectura;
+  return lectura;
 }
 
-void Fichero::EscribirFichero(std::vector<std::string> kEscritura) {
-  for (int i=0; i< kEscritura.size(); i++) {
-    kFicheroEscritura << kEscritura[i] << "\n";
+// Metodo para escribir cualquier vector de string en el fichero
+void Fichero::EscribirFichero(std::vector<std::string> escritura) {
+  for (int i = 0; i< escritura.size(); i++) {
+    fichero_escritura << escritura[i] << "\n";
   }
 }

@@ -12,15 +12,16 @@
 
 class Simbolo {
   public:
-    Simbolo(std::vector<std::string> kLectura);
+    Simbolo(std::vector<std::string> lectura);
     ~Simbolo();
     std::vector<std::string> GetSimbolos();
     void DisplaySimbolos();
     int Size();
     std::string operator[] (int& other);
-    void SetSimbolos(std::string kEntrada, int kPosicion);
+    void erase(int& posicion);
+    void SetSimbolos(std::string entrada, int posicion);
   private:
-    std::vector<std::string> kSimbolos;
-    std::vector<int> ContarEspacios(std::vector<std::string> kEntrada);
-    std::string GenerarSimbolos(std::string kEntrada);
+    std::vector<std::string> simbolos;
+    std::vector<int> ContarEspacios(std::vector<std::string> entrada);
+    std::string GenerarSimbolos(std::string entrada);
 };

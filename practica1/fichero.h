@@ -14,10 +14,10 @@ class Fichero {
     Fichero(std::string nombre_fichero, bool opcode = false);
     ~Fichero();
     std::vector<std::string> GetVectorString();
-    void EscribirFichero(std::vector<std::string> kEscritura);
+    void EscribirFichero(std::vector<std::string> escritura);
   private:
-    std::vector<std::string> kLectura;
-    std::ifstream kFicheroLectura;
-    std::ofstream kFicheroEscritura;
+    std::vector<std::string> lectura;
+    std::ifstream fichero_lectura;
+    std::ofstream fichero_escritura;
 };
 

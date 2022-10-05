@@ -1,3 +1,11 @@
+// Autor: Héctor Rodríguez Alonso
+// Correo: alu0101365107@ull.es
+// Fecha: 05/10/2022
+// Archivo alfabeto_cliente.cc: Fichero principal el cual posee el main, este es el encargado de crear los
+//         objetos, en este caso Cadena, Simbolo y Alfabeto, ademas de proporcionar las posibles opciones,
+//         como puede ser Longitud, Inversa, Prefijos y Sufijos de una cadena, ademas de la generacion 
+//         de subcadenas.
+
 #include "fichero.h"
 #include "simbolo.h"
 #include "cadena.h"
@@ -16,7 +24,6 @@ int main(int argc, char* argv[]) {
     Cadena kCadenas(kLectura);
     Simbolo kSimbolos(kLectura);
     Alfabeto kAlfabetos(kSimbolos, kCadenas);
-    kAlfabetos.DisplayAlfabetos();
     switch (kOpcode) {
       case(1):
         kFicheroEscitura.EscribirFichero(kCadenas.GetLongitud());
@@ -30,8 +37,9 @@ int main(int argc, char* argv[]) {
       case(4):
         kCadenas.Inversa();
         kFicheroEscitura.EscribirFichero(kCadenas.GetPrefijos());
+        break;
       case(5):
-        kCadenas.GetSubcadenas();
+        kFicheroEscitura.EscribirFichero(kCadenas.GetSubcadenas());
         break;
       default:
         std::cout << "Para más información --help\n";

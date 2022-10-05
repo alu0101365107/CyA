@@ -14,14 +14,16 @@
 
 class Cadena {
   public:
-    Cadena(std::vector<std::string> Kentrada);
+    Cadena(const std::vector<std::string> kEntrada);
     ~Cadena();
     std::vector<std::string> GetCadenas();
     std::vector<std::string> GetLongitud();
     std::vector<std::string> Inversa();
     std::vector<std::string> GetPrefijos();
     std::vector<std::string> GetSubcadenas();
+    std::string operator[] (int& other);
+    void erase(int& posicion);
     void DisplayCadenas();
   private:
-    std::vector<std::string> kCadenas;
+    std::vector<std::string> cadenas;
 };
