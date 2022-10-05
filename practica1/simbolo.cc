@@ -1,3 +1,8 @@
+// Autor: Héctor Rodríguez Alonso
+// Correo: alu0101365107@ull.es
+// Fecha: 05/10/2022
+// Archivo simbolo.cc: Encargado de la creación de los métodos de la clase Simbolo.
+
 #include "simbolo.h"
 
 Simbolo::Simbolo(std::vector<std::string> kLectura) {
@@ -18,9 +23,9 @@ Simbolo::Simbolo(std::vector<std::string> kLectura) {
       tmp_entrada = tmp_entrada + " ";
     }
     if (tmp_contador == 0) {
-      simbolos.push_back(GenerarSimbolos(kLectura[cadena]));
+      kSimbolos.push_back(GenerarSimbolos(kLectura[cadena]));
     } else { 
-      simbolos.push_back(tmp_entrada);
+      kSimbolos.push_back(tmp_entrada);
     }
     tmp_entrada = "";
     letra = 0;
@@ -30,13 +35,13 @@ Simbolo::Simbolo(std::vector<std::string> kLectura) {
 
 Simbolo::~Simbolo() {};
 
-std::vector<std::string> Simbolo::getSimbolos() {
-  return simbolos;
+std::vector<std::string> Simbolo::GetSimbolos() {
+  return kSimbolos;
 };
 
-void Simbolo::displaySimbolos() {
-  for(int i= 0; i < simbolos.size(); i++ ) {
-    std::cout << simbolos[i] << "\n";
+void Simbolo::DisplaySimbolos() {
+  for(int i= 0; i < kSimbolos.size(); i++ ) {
+    std::cout << kSimbolos[i] << "\n";
   };
   std::cout << std::endl;
 };
@@ -63,4 +68,16 @@ std::string Simbolo::GenerarSimbolos(std::string kEntrada) {
     tmp_cadena = tmp_cadena + kEntrada[letra] + " ";
   }
   return tmp_cadena;
+}
+
+int Simbolo::Size() {
+  return kSimbolos.size();
+}
+
+std::string Simbolo::operator[](int& other) {
+  return kSimbolos[other];
+}
+
+void Simbolo::SetSimbolos(std::string kEntrada, int kPosicion) {
+  kSimbolos[kPosicion] = kEntrada;
 }

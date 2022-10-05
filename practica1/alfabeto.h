@@ -9,11 +9,12 @@
 
 class Alfabeto {
   public:
-    Alfabeto(Simbolo simbolos, Cadena cadenas);
+    Alfabeto(Simbolo& simbolos, Cadena& cadenas);
     ~Alfabeto();
     std::vector<std::string> getAlfabeto();
-    void displayAlfabeto();
+    void DisplayAlfabetos();
   private:
-    std::vector<std::string> alfabetos;
+    std::vector<std::string> kAlfabetos;
+    void BorrarDuplicadosSimbolos(std::string kEntrada, Simbolo& kSimbolos, int kPosicion);
 };
 
