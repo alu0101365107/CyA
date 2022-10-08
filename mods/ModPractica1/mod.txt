@@ -1,0 +1,4 @@
+alfabeto-cadena original-salida de la opcion
+si sacamos eso, tambien poner los simbolos que no se usan en la cadena
+
+{a, b, c} {c} ab opcion

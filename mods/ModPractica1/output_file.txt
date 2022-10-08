@@ -1,0 +1,4 @@
+{a, b } -- abbab -- ε a b b a b ab bb ba ab abb bba bab abba bbab abbab 
+{0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } -- 6793836 -- ε 6 7 9 3 8 3 6 67 79 93 38 83 36 679 793 938 383 836 6793 7938 9383 3836 67938 79383 93836 679383 793836 6793836 
+{h, o, l, a } -- hola -- ε h o l a ho ol la hol ola hola 
+{a } -- aaa -- ε a a a aa aa aaa 
