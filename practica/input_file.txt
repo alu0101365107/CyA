@@ -1,3 +1,15 @@
-a bc abc
+abc
+abcd
+a b abbab
+b a ab
+0 1 2 3 4 5 6 7 8 9 6793836
+a b c
+hola
+aba
+ab ba abba
+a ba abac
+aaaac
 ab ba abba
 ab ba baab
+a ac aac
+a bc d abcd

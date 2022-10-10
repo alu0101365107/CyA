@@ -51,8 +51,8 @@ int main(int argc, char* argv[]) {
       for(int i = 0; i < alfabetos.size(); i++) {
         //simbolos[i].DisplaySimbolos();
         //cadenas[i].DisplayCadenas();
-        //alfabetos[i].DisplayAlfabeto();
-        //std::cout << "\n";
+        alfabetos[i].DisplayAlfabeto();
+        std::cout << "\n";
       }
     }
   } else if(strcmp(argv[1], "--help") == 0) {
