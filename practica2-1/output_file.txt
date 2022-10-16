@@ -1,0 +1,5 @@
+{ a b c }{ aa aabc abbcc abca abcabc abcbbcc abccab acab bbcca bbccabc bbccbbcc bbcccab caba cababc cabbbcc cabcab }
+{ a }{ aa aaa aaaa aaaaa aaaaaa }
+{ a b }{ }
+{ 0 1 }{ & }
+{ 0 1 }{ 00 000 0000 0001 001 0010 0011 01 010 0100 0101 011 0110 0111 10 100 1000 1001 101 1010 1011 11 110 1100 1101 111 1110 1111 }
