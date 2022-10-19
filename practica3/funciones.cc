@@ -1,6 +1,6 @@
 // Autor: Héctor Rodríguez Alonso
 // Correo: alu0101365107@ull.es
-// Fecha: 12/10/2022
+// Fecha: 19/10/2022
 // Archivo funciones.cc: Encargado de la creación de los métodos para lectura y escritura de ficheros
 
 #include "funciones.h"
@@ -39,11 +39,22 @@ std::vector<Cadena> LeerLenguajeFichero(std::string entrada) {
   return cadenas;
 }
 
-std::string Operacion(std::string entrada) {
-
+//Metodo para leer el nombre de un lenguaje
+std::string LeerNombreLenguaje(std::string entrada) {
+  std::string salida = "";
+  for (int iterador = 0; iterador < entrada.size(); iterador++) {
+    if (entrada[iterador] == ' ') {
+      break;
+    } else {
+      salida += entrada[iterador];
+    }
+  }
+  return salida;
 }
 
-//Metodo para escribir una string en un fichero dado
-void EscribirFichero(std::ofstream& fichero_escritura, std::string entrada) {
-  fichero_escritura << entrada << "\n";
+//Metodo el cual saca de la pila un lenguaje
+Lenguaje GetElementoPila(std::stack<Lenguaje>& pila) {
+  Lenguaje lenguaje = pila.top();
+  pila.pop();
+  return lenguaje;
 }

@@ -1,6 +1,6 @@
 // Autor: Héctor Rodríguez Alonso
 // Correo: alu0101365107@ull.es
-// Fecha: 12/10/2022
+// Fecha: 19/10/2022
 // Archivo lenguaje.cc: Encargado de la creación de los métodos de la clase Lenguaje.
 
 #include "lenguaje.h"
@@ -42,17 +42,23 @@ std::string Lenguaje::GetString(){
 
 //Metodo para concatenar un lenguaje con otro
 Lenguaje Lenguaje::Concatenacion(Lenguaje& entrada) {
-  std::vector<Cadena> vector_cadena = {};
-  for (Cadena cadena : cadenas) {
-    for (Cadena cadena_entrada : entrada.cadenas) {
-      vector_cadena.push_back(cadena.Concatenacion(cadena_entrada));
-    }
+  if (alfabeto.GetVacio() == true || entrada.alfabeto.GetVacio() == true) {
+    return Lenguaje();
   }
-  return Lenguaje(vector_cadena, alfabeto.AddAlfabeto(entrada.alfabeto));
+  std::vector<Cadena> vector_cadena = {};
+    for (Cadena cadena : cadenas) {
+      for (Cadena cadena_entrada : entrada.cadenas) {
+        vector_cadena.push_back(cadena.Concatenacion(cadena_entrada));
+      }
+    }
+    return Lenguaje(vector_cadena, alfabeto.AddAlfabeto(entrada.alfabeto));
 }
 
 //Metodo para realizar la union con otro lenguaje
 Lenguaje Lenguaje::Union(Lenguaje& entrada) {
+  if (alfabeto.GetVacio() == true || entrada.alfabeto.GetVacio() == true) {
+    return Lenguaje();
+  }
   std::string tmp_concat = "";
   std::vector<Cadena> vector_cadena = {};
   std::string concat = "";
@@ -75,6 +81,9 @@ Lenguaje Lenguaje::Union(Lenguaje& entrada) {
 
 //Metodo para realizar la interseccion con otro lenguaje
 Lenguaje Lenguaje::Interseccion(Lenguaje& entrada) {
+  if (alfabeto.GetVacio() == true || entrada.alfabeto.GetVacio() == true) {
+    return Lenguaje();
+  }
   std::string tmp_concat = "";
   std::string tmp_concat2 = "";
   std::vector<Cadena> vector_cadena = {};
@@ -98,6 +107,9 @@ Lenguaje Lenguaje::Interseccion(Lenguaje& entrada) {
 
 //Metodo para realizar la diferencia con otro lenguaje
 Lenguaje Lenguaje::Diferencia(Lenguaje& entrada) {
+  if (alfabeto.GetVacio() == true || entrada.alfabeto.GetVacio() == true) {
+    return Lenguaje();
+  }
   std::string tmp_concat = "";
   std::string tmp_concat2 = "";
   std::vector<Cadena> vector_cadena = {};

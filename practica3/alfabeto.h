@@ -1,6 +1,6 @@
 // Autor: Héctor Rodríguez Alonso
 // Correo: alu0101365107@ull.es
-// Fecha: 12/10/2022
+// Fecha: 19/10/2022
 // Archivo alfabeto.h: Encargado de la definición de la clase Alfabeto y sus correspondientes
 //                   métodos y atributos.
 
@@ -22,6 +22,8 @@ class Alfabeto {
     Alfabeto AddAlfabeto(Alfabeto& entrada);
     void DisplayAlfabeto();
     std::string GetString();
+    bool GetVacio();
   private:
     std::set<Simbolo> alfabeto;
+    bool vacio = false;
 };

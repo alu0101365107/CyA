@@ -1,6 +1,6 @@
 // Autor: Héctor Rodríguez Alonso
 // Correo: alu0101365107@ull.es
-// Fecha: 12/10/2022
+// Fecha: 19/10/2022
 // Archivo cadena.h: Encargado de la creación de los métodos de la clase Cadena.
 
 #pragma once

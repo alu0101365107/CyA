@@ -1,6 +1,6 @@
 // Autor: Héctor Rodríguez Alonso
 // Correo: alu0101365107@ull.es
-// Fecha: 05/10/2022
+// Fecha: 19/10/2022
 // Archivo lenguaje.h: Encargado de la creación de los métodos de la clase Lenguaje.
 
 #pragma once
