@@ -10,23 +10,17 @@
 #include "funciones.h"
 #include "alfabeto.h"
 #include "lenguaje.h"
-#include <regex>
-#include <cctype>
 #include <stack>
 
 int main(int argc, char* argv[]) {
   if(argc == 1) {
     std::cout << "Modo de uso: ./alfabeto_cliente input_file1.txt\n";
     std::cout << "Para más información --help\n";
-  } else if(strcmp(argv[1], "--help") == 0) {
-    std::cout << "Uso correcto del programa\n- Nombre del fichero de lectura_1\n";
-    std::cout << "Modo de uso: ./alfabeto_cliente input_file1.txt\n";
   }else if (argc == 2) {
     std::string kLecturaFichero = argv[1];
     std::ifstream fichero_lectura;
     std::string tmp_entrada;
     std::vector<Lenguaje> lenguajes = {};
-    std::vector<Alfabeto> alfabetos = {};
     std::vector<std::string> nombre_lenguajes = {};
     std::string nombre = "";
     int max_size_string = 0;
@@ -37,11 +31,10 @@ int main(int argc, char* argv[]) {
     Lenguaje lenguaje_operacion_2;
     fichero_lectura.open(kLecturaFichero);
     if(fichero_lectura.is_open()) {
-      while(std::getline(fichero_lectura, tmp_entrada)) {
+      while(std::getline(fichero_lectura, tmp_entrada) || tmp_entrada.size() > 0) {
         if (tmp_entrada.find("=") != std::string::npos) {
           Alfabeto tmp_alfabeto(LeerAlfabetoFichero(tmp_entrada));
           Lenguaje tmp_lenguaje(LeerLenguajeFichero(tmp_entrada), tmp_alfabeto);
-          std::cout << LeerNombreLenguaje(tmp_entrada) << "\n";
           nombre_lenguajes.push_back(LeerNombreLenguaje(tmp_entrada));
           lenguajes.push_back(tmp_lenguaje);
         } else {
@@ -104,12 +97,21 @@ int main(int argc, char* argv[]) {
             iterador_nombre = 0;
           }
           nombre = "";
-          lenguaje_operacion = pila.top();
-          pila.pop();
+          lenguaje_operacion = GetElementoPila(pila);
           lenguaje_operacion.Display();
+          if (fichero_lectura.eof() && tmp_entrada != "EXIT") {
+            std::cout << "Introduzca una expresion o [EXIT] para finalizar\n";
+            std::getline(std::cin, tmp_entrada);
+            if (tmp_entrada == "EXIT") {
+              return 0;
+            }
+          }
         }
       }
     }
+  } else if(strcmp(argv[1], "--help") == 0) {
+    std::cout << "Uso correcto del programa\n- Nombre del fichero de lectura_1\n";
+    std::cout << "Modo de uso: ./alfabeto_cliente input_file1.txt\n";
   } else {
     std::cout << "Para más información --help\n";
     std::cout << argv[1];
