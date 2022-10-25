@@ -93,7 +93,7 @@ bool Fichero::IsComentario(std::string entrada) {
   return false;
 }
 
-// Meotod el cual busca variables de tipo "double" e "int" en una string dada
+// Metodo el cual busca variables de tipo "double" e "int" en una string dada
 bool Fichero::IsVariable(std::string entrada) {
   for(std::string tmp_tipo: tipo_variable) {
 	if(std::regex_search(entrada, std::regex("("+tmp_tipo+")\\s(\\w+)\\s(\\;|\\=\\s\\w+)"))) {
