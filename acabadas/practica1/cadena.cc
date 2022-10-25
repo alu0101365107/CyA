@@ -1,8 +1,8 @@
-// Autor: Héctor Rodríguez Alonso
-// Correo: alu0101365107@ull.es
-// Fecha: 05/10/2022
-// Archivo cadena.cc: Encargado de la creación de los métodos de la clase Cadena.
-
+/** Autor: Héctor Rodríguez Alonso
+* Correo: alu0101365107@ull.es
+* Fecha: 05/10/2022
+* Archivo cadena.cc: Encargado de la creación de los métodos de la clase Cadena.
+*/
 #include "cadena.h"
 
 // Constructor de la clase Cadena el cual recibe un vector de string.
