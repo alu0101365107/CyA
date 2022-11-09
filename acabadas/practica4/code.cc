@@ -21,7 +21,9 @@
       case 1:
         return 1;
       default :
-        int factorial = 1;
+        /**
+         * int factorial = 1;
+        */
           for (int i = 1; i <= number ; ++ i ) {
             factorial *= i ;
            }
@@ -38,7 +40,7 @@
       std :: cout << i << "! = " << ( double ) Factorial ( i ) << std :: endl ;
     }
     while (iterador_while < 2) {
-      iterador_while--;
+      iterador_while -= 1;
     }
   return 0;
 }

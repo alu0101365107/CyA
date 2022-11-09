@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
     std::ofstream fichero_escritura;
     fichero_lectura.open(kLecturaFichero);
     fichero_escritura.open(kEscrituraFichero);
-    if(fichero_lectura.is_open() && fichero_escritura.is_open()) {
+    if (fichero_lectura.is_open() && fichero_escritura.is_open()) {
       Fichero codigo(fichero_lectura, kLecturaFichero);
       fichero_escritura << codigo.GetAnalisis();
     }

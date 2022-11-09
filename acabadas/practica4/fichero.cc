@@ -14,12 +14,14 @@
 Fichero::Fichero(std::ifstream& entrada_fichero, std::string entrada_nombre_programa) {
   std::string tmp_entrada = "";
   nombre_programa = entrada_nombre_programa;
-  while(std::getline(entrada_fichero, tmp_entrada)) {
+  while (std::getline(entrada_fichero, tmp_entrada)) {
 	linea += 1;
     LeerBloqueComentario(entrada_fichero, tmp_entrada);
 	  if (IsBucle(tmp_entrada) == false) {
 		if (IsComentario(tmp_entrada) == false) {
-          IsVariable(tmp_entrada);
+          if (IsVariable(tmp_entrada) == false) {
+			IsAsignacion(tmp_entrada);
+		  }
 		}
 	  }
 	  if (main == false) {
@@ -38,12 +40,12 @@ Fichero::~Fichero() {};
 */
 bool Fichero::LeerBloqueComentario(std::ifstream& fichero, std::string entrada) {
   std::string kEspacio = "\n";
-  if(std::regex_search(entrada, std::regex("(\\/\\*+)"))) {
+  if (std::regex_search(entrada, std::regex("(\\/\\*+)"))) {
 	bloque_comentario.lineaC = linea;
 	bloque_comentario.comentario += "DESCRIPTION : \n" + entrada + kEspacio;
 	std::getline(fichero, entrada);
 	linea += 1;
-	while(!std::regex_search(entrada, std::regex("\\*\\/"))) {
+	while (!std::regex_search(entrada, std::regex("\\*\\/"))) {
       bloque_comentario.comentario += entrada + kEspacio;
 	  std::getline(fichero, entrada);
 	  linea += 1;
@@ -62,15 +64,15 @@ bool Fichero::LeerBloqueComentario(std::ifstream& fichero, std::string entrada) 
 
 // Metodo el cual busca en una string la siguiente expresion regular, la cual refleja el main de un programa
 void Fichero::IsMain(std::string entrada) {
-  if(std::regex_search(entrada, std::regex("[a-z]*\\s(main)\\s(\\([a-z]*\\))\\s(\\{)"))) {
+  if (std::regex_search(entrada, std::regex("[a-z]*\\s(main)\\s(\\([a-z]*\\))\\s(\\{)"))) {
     main = true;
   }
 }
 
 // Metodo el cual busca los bucles for y while en una string dada
 bool Fichero::IsBucle(std::string entrada) {
-  for(std::string tmp_tipo: tipo_bucle) {
-	if(std::regex_search(entrada, std::regex("("+tmp_tipo+")\\s(\\(.+\\{)"))) {
+  for (std::string tmp_tipo: tipo_bucle) {
+	if (std::regex_search(entrada, std::regex("("+tmp_tipo+")\\s(\\(.+\\{)"))) {
       bucle tmp_bucle;
 	  tmp_bucle.tipo = tmp_tipo;
 	  tmp_bucle.linea = linea;
@@ -95,17 +97,41 @@ bool Fichero::IsComentario(std::string entrada) {
 
 // Metodo el cual busca variables de tipo "double" e "int" en una string dada
 bool Fichero::IsVariable(std::string entrada) {
-  for(std::string tmp_tipo: tipo_variable) {
-	if(std::regex_search(entrada, std::regex("("+tmp_tipo+")\\s(\\w+)\\s(\\;|\\=\\s\\w+)"))) {
+  for (std::string tmp_tipo: tipo_variable) {
+	if (std::regex_search(entrada, std::regex("("+tmp_tipo+")\\s(\\w+)\\s(\\;|\\=\\s\\w+)"))) {
       std::transform(tmp_tipo.begin(), tmp_tipo.end(), tmp_tipo.begin(), ::toupper);
-	    variable tmp_variable;
-	    tmp_variable.tipo = tmp_tipo;
-	    entrada = std::regex_replace(entrada, std::regex("\\s+"), " ");
-	    entrada.erase(0, tmp_variable.tipo.size()+2);
-	    tmp_variable.nombre = entrada;
-	    tmp_variable.linea = linea;
-	    variables.push_back(tmp_variable);
+	  variable tmp_variable;
+	  tmp_variable.tipo = tmp_tipo;
+	  entrada = std::regex_replace(entrada, std::regex("\\s+"), " ");
+	  entrada.erase(0, tmp_variable.tipo.size()+2);
+	  tmp_variable.nombre = entrada;
+	  tmp_variable.linea = linea;
+	  variables.push_back(tmp_variable);
+	  return true;
+	}
+  }
+  return false;
+}
+
+bool Fichero::IsAsignacion(std::string entrada) {
+  if (!std::regex_search(entrada, std::regex("(\\w+)\\s(\\w+)\\s"))) {
+	for (std::string tmp_asignacion: tipo_asignacion) {
+	  if (std::regex_search(entrada, std::regex(("(\\w+)\\s("+tmp_asignacion+")")))) {
+		variable tmp_variable;
+		std::smatch posible_match;
+		entrada = std::regex_replace(entrada, std::regex("\\s+"), " ");
+		entrada.erase(0, 1);
+		int iterador = 0;
+		while( entrada[iterador] != ' ') {
+          tmp_variable.tipo += entrada[iterador];
+		  iterador += 1;
+		}
+		entrada.erase(0, tmp_variable.tipo.size());
+		tmp_variable.nombre = entrada;
+		tmp_variable.linea = linea;
+		variables.push_back(tmp_variable);
 	    return true;
+	  }
 	}
   }
   return false;
@@ -114,17 +140,19 @@ bool Fichero::IsVariable(std::string entrada) {
 // Metodo el cual devuelve una string formateada con todo el analisis
 std::string Fichero::GetAnalisis() {
   std::string salida = "";
-  std::string kEspacio = "\n";
-  std::string kDobleEspacio = "\n\n";
+  const std::string kEspacio = "\n";
+  const std::string kDobleEspacio = "\n\n";
   salida = "PROGRAM: " + nombre_programa + kEspacio;
   if (bloque_comentario.comentario != "") {
     salida += bloque_comentario.comentario + kEspacio;
   }
+  salida += "MAIN: ";
   if (main == false) {
-    salida += "MAIN: " + kEspacio + "False"+ kDobleEspacio;
+    salida += "False";
   } else {
-    salida += "MAIN: " + kEspacio + "True"+ kDobleEspacio;
+	salida += "True";
   }
+  salida += kDobleEspacio;
   if (variables.size() > 0) {
     salida += "VARIABLES: \n";
     for (variable tmp_variable: variables) {

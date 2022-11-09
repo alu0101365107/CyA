@@ -15,6 +15,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <iterator>
 
 // Esctructura la cual define un comentario
 typedef struct {
@@ -49,6 +50,7 @@ class Fichero {
     bool IsBucle(std::string entrada);
     bool IsComentario(std::string entrada);
     bool IsVariable(std::string entrada);
+    bool IsAsignacion(std::string entrada);
     std::vector<std::string> contenido_fichero = {""};
     comentario bloque_comentario;
     std::vector<comentario> comentarios = {};
@@ -59,4 +61,5 @@ class Fichero {
     int linea = 0;
     std::vector<std::string> tipo_bucle = {"for", "while"};
     std::vector<std::string> tipo_variable = {"int", "double"};
+    std::vector<std::string> tipo_asignacion = {"\\=", "\\+\\=", "\\-\\=", "\\*\\="};
 };

@@ -1,5 +1,4 @@
 PROGRAM: code.cc
-
 DESCRIPTION : 
 /**
  * Universidad de La Laguna
@@ -13,19 +12,24 @@ DESCRIPTION :
  *
  * @see https :// github .com/IB -2022 -2023/ IB -class -code - examples /
 */
+DESCRIPTION : 
+        /**
+         * int factorial = 1;
+        */
 
-MAIN: 
-True
+MAIN: True
 
 VARIABLES: 
-[Line 24]INT: factorial = 1;
-[Line 34]INT: limit ;
+[Line 28]factorial:  *= i ;
+[Line 36]INT: limit ;
+[Line 43]iterador_while:  -= 1;
 
 STATEMENTS:
-[Line 25] LOOP: for
-[Line 37] LOOP: for
-[Line 40] LOOP: while
+[Line 27] LOOP: for
+[Line 39] LOOP: for
+[Line 42] LOOP: while
 
 COMMENTS: 
 [Line 1-12 ] DESCRIPTION
 [Line 17]  // Returns the factorial of the argument
+[Line 24-26 ] DESCRIPTION
