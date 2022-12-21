@@ -92,6 +92,7 @@ int main(int argc, char* argv[]) {
                   }
                 }
               automata.AddEstados(estado);
+              contador_linea_estado = 0;
               break;
             }
           }
